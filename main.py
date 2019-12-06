@@ -6,16 +6,29 @@ from flask import Flask
 
 app = Flask(__name__)
 
+grafo = Grafo()
+
 arquivoGrafo = []
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+    menu =  []
+    menu.append('<h1>Menu</h1>')
+    menu.append('<p>/arquivo/nome_do_arquivo</p>')
+    menu.append('<p>/caminho/Origem-Destino</p>')
+    return ''.join(menu)
 
-@app.route('/<name>')
-def hello_name(name):
+@app.route('/arquivo/<name>')
+def openFile(name):
     arquivos  = openArquivo(name)
     return json.dumps(arquivos)
+
+@app.route('/caminho/<rotaPedida>')
+def retornaRotaECusto(rotaPedida):
+    rota = rotaPedida.split('-')
+    origem = Vertice(rota[0])
+    destino = Vertice(rota[1])
+    return printRota(origem, destino)
 
 
 
@@ -37,10 +50,10 @@ def adicionarArestaAoGrafo(Grafo, LinhaCsv):
     else:
         print("já existe")
 
-def printRota(Grafo, Origem, Destino):
+def printRota(Origem, Destino):
 
     grafo.Depth_first_search()
-    Grafo.imprime_Grafo_com_Destino(Origem.getId(), Destino.getId())
+    grafo.imprime_Grafo_com_Destino(Origem.getId(), Destino.getId())
     resposta = grafo.Dijkstra(Origem.getId())
     for ele in resposta:
         if ele.id == Destino.getId():
@@ -48,7 +61,6 @@ def printRota(Grafo, Origem, Destino):
 
 
 def openArquivo(nome_ficheiro):
-    # nome_ficheiro = 'input-file.csv'
     arquivos = []
     with open(nome_ficheiro, 'r') as ficheiro:
         reader = csv.reader(ficheiro, delimiter=',', quoting=csv.QUOTE_NONE)
@@ -57,30 +69,6 @@ def openArquivo(nome_ficheiro):
                 arquivos.append(linha)
         except csv.Error as e:
             sys.exit('ficheiro %s, linha %d: %s' % (nome_ficheiro, reader.line_num, e))
-    return arquivos
-
-if __name__ == '__main__':
-
-    app.run(host='127.0.0.10', port='5000', debug=True)
-
-    args = []
-
-    # Ler argumento linha de comando e abrindo arquivo
-    for param in sys.argv:
-        args.append(param)
-    # nome_ficheiro = args[1]
-    nome_ficheiro = 'input-file.csv'
-    arquivos = openArquivo(nome_ficheiro)
-
-    with open(nome_ficheiro, 'r') as ficheiro:
-        reader = csv.reader(ficheiro, delimiter=',', quoting=csv.QUOTE_NONE)
-        try:
-            for linha in reader:
-                arquivos.append(linha)
-        except csv.Error as e:
-            sys.exit('ficheiro %s, linha %d: %s' % (nome_ficheiro, reader.line_num, e))
-
-    grafo = Grafo()
 
     for arquivo in arquivos:
         for i in range(0, 2):
@@ -88,27 +76,16 @@ if __name__ == '__main__':
             adicionaVerticeAoGrafo(grafo, vertice)
         adicionarArestaAoGrafo(grafo, arquivo)
 
-    # for ele in grafo.lista_Vertices:
-    #     print(ele.getId())
-    #
-    # print('**************************')
 
+if __name__ == '__main__':
+    app.run(host='127.0.0.10', port='5000', debug=True)
 
-    # for aresta in grafo.lista_Arestas:
-    #         print(aresta.getOrigem().getId())
-    #         print(aresta.getPeso())
-    #         print(aresta.getDestino().getId())
-    #         print('-------------------------')
+    args = []
 
+    for param in sys.argv:
+        args.append(param)
+    nome_ficheiro = args[1]
 
-    # print('DE-PARA')
-    # origem, destino = map(str, sys.stdin.readline().split('-'))
-    # origem = origem.replace('\n','')
-    # destino = destino.replace('\n','')
+    arquivos = openArquivo(nome_ficheiro)
 
-    # ver1 = Vertice('GRU')
-    # ver2 = Vertice('CDG')
-    # printRota(grafo, ver1, ver2)
-
-    #
 
