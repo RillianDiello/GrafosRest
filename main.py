@@ -28,7 +28,7 @@ def retornaRotaECusto(rotaPedida):
     rota = rotaPedida.split('-')
     origem = Vertice(rota[0])
     destino = Vertice(rota[1])
-    return printRota(origem, destino)
+    return json.dumps(printRota(origem, destino))
 
 
 
@@ -55,9 +55,12 @@ def printRota(Origem, Destino):
     grafo.Depth_first_search()
     grafo.imprime_Grafo_com_Destino(Origem.getId(), Destino.getId())
     resposta = grafo.Dijkstra(Origem.getId())
+    custo = 0
     for ele in resposta:
         if ele.id == Destino.getId():
-            print('Custo ', ele.estimativa)
+            custo = ele.estimativa
+
+    return custo
 
 
 def openArquivo(nome_ficheiro):
@@ -75,9 +78,11 @@ def openArquivo(nome_ficheiro):
             vertice = Vertice(arquivo[i])
             adicionaVerticeAoGrafo(grafo, vertice)
         adicionarArestaAoGrafo(grafo, arquivo)
+    return arquivos
 
 
 if __name__ == '__main__':
+
     app.run(host='127.0.0.10', port='5000', debug=True)
 
     args = []
@@ -87,5 +92,9 @@ if __name__ == '__main__':
     nome_ficheiro = args[1]
 
     arquivos = openArquivo(nome_ficheiro)
+
+
+
+
 
 
