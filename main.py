@@ -10,12 +10,15 @@ grafo = Grafo()
 
 arquivoGrafo = []
 
+nome_ficheiro = ''
+
 @app.route('/', methods=['GET'])
 def home():
     menu =  []
     menu.append('<h1>Menu</h1>')
     menu.append('<p>/arquivo/nome_do_arquivo</p>')
     menu.append('<p>/caminho/Origem-Destino</p>')
+    menu.append('<p>/novaRota/Origem,Destino,Custo</p>')
     return ''.join(menu)
 
 @app.route('/arquivo/<name>')
@@ -30,23 +33,31 @@ def retornaRotaECusto(rotaPedida):
     destino = Vertice(rota[1])
     return json.dumps(printRota(origem, destino))
 
+@app.route('/novaRota/<novaRota>')
+def NovaRota(novaRota):
+    if writeArquivo(novaRota):
+        return "Rota incluida com sucesso"
+    else:
+        return "Não foi possivel incluir rota"
 
 
-def adicionaVerticeAoGrafo(Grafo, Vertice):
-    exists = Grafo.busca_Vertice(Vertice.getId())
+
+
+def adicionaVerticeAoGrafo(Vertice):
+    exists = grafo.busca_Vertice(Vertice.getId())
     if (exists):
         return False
     else:
-        Grafo.novo_Vertice(Vertice.getId())
+        grafo.novo_Vertice(Vertice.getId())
 
-def adicionarArestaAoGrafo(Grafo, LinhaCsv):
+def adicionarArestaAoGrafo(LinhaCsv):
     v1 = Vertice(LinhaCsv[0])
     v2 = Vertice(LinhaCsv[1])
 
-    arestaJaExiste = Grafo.busca_Aresta(v1,v2)
+    arestaJaExiste = grafo.busca_Aresta(v1,v2)
 
     if arestaJaExiste is None:
-        Grafo.nova_Aresta(v1.getId(), v2.getId(), int(LinhaCsv[2]))
+        grafo.nova_Aresta(v1.getId(), v2.getId(), int(LinhaCsv[2]))
     else:
         print("já existe")
 
@@ -73,25 +84,51 @@ def openArquivo(nome_ficheiro):
         except csv.Error as e:
             sys.exit('ficheiro %s, linha %d: %s' % (nome_ficheiro, reader.line_num, e))
 
-    for arquivo in arquivos:
-        for i in range(0, 2):
-            vertice = Vertice(arquivo[i])
-            adicionaVerticeAoGrafo(grafo, vertice)
-        adicionarArestaAoGrafo(grafo, arquivo)
     return arquivos
 
 
-if __name__ == '__main__':
+def writeArquivo(NovaRota):
+    with open(nome_ficheiro, 'a+') as ficheiro:
+        ficheiro.write('\n')
+        ficheiro.write(NovaRota)
+        ficheiro.write('\n')
 
-    app.run(host='127.0.0.10', port='5000', debug=True)
+
+    atualizaGrafo(NovaRota)
+
+
+
+def criaGrafo(dadosEntrada):
+    for arquivo in dadosEntrada:
+        for i in range(0, 2):
+            vertice = Vertice(arquivo[i])
+            adicionaVerticeAoGrafo(vertice)
+        adicionarArestaAoGrafo(arquivo)
+
+
+def atualizaGrafo(listaNovaRota):
+    listaNovaRota = listaNovaRota.split(',')
+    v1 = Vertice(listaNovaRota[0])
+    adicionaVerticeAoGrafo(v1)
+
+    v2 = Vertice(listaNovaRota[1])
+    adicionaVerticeAoGrafo(v2)
+
+    adicionarArestaAoGrafo(listaNovaRota)
+
+if __name__ == '__main__':
 
     args = []
 
     for param in sys.argv:
         args.append(param)
-    nome_ficheiro = args[1]
+    # nome_ficheiro = args[1]
+    nome_ficheiro = 'input-fileCp.csv'
 
     arquivos = openArquivo(nome_ficheiro)
+    criaGrafo(arquivos)
+
+    app.run(host='127.0.0.10', port='5000', debug=True)
 
 
 
