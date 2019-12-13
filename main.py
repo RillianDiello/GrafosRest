@@ -3,8 +3,10 @@ import csv, sys, json
 from utils.Grafo import *
 from utils.Vertice import *
 from flask import Flask
+from flask import request, jsonify
 
-app = Flask(__name__)
+app = Flask('grafoApi')
+app.config["DEBUG"] = True
 
 grafo = Grafo()
 
@@ -21,11 +23,13 @@ def home():
     menu.append('<p>/novaRota/Origem,Destino,Custo</p>')
     return ''.join(menu)
 
+@app.route('/', methods=['GET'])
 @app.route('/arquivo/<name>')
 def openFile(name):
     arquivos  = openArquivo(name)
-    return json.dumps(arquivos)
+    return jsonify(arquivos)
 
+@app.route('/', methods=['GET'])
 @app.route('/caminho/<rotaPedida>')
 def retornaRotaECusto(rotaPedida):
     rota = rotaPedida.split('-')
@@ -33,12 +37,13 @@ def retornaRotaECusto(rotaPedida):
     destino = Vertice(rota[1])
     return json.dumps(printRota(origem, destino))
 
+@app.route('/', methods=['GET'])
 @app.route('/novaRota/<novaRota>')
 def NovaRota(novaRota):
     if writeArquivo(novaRota):
-        return "Rota incluida com sucesso"
+        return '<h1>Rota incluida com sucesso</h1>'
     else:
-        return "Não foi possivel incluir rota"
+        return '<h1>Não foi possivel incluir rota</h1>'
 
 
 
