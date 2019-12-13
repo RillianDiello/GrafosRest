@@ -47,7 +47,6 @@ def NovaRota(novaRota):
 
 
 
-
 def adicionaVerticeAoGrafo(Vertice):
     exists = grafo.busca_Vertice(Vertice.getId())
     if (exists):
@@ -93,26 +92,33 @@ def openArquivo(nome_ficheiro):
 
 
 def writeArquivo(NovaRota):
-    with open(nome_ficheiro, 'a+') as ficheiro:
-        ficheiro.write('\n')
-        ficheiro.write(NovaRota)
-        ficheiro.write('\n')
+    try:
+        with open(nome_ficheiro, 'a+') as ficheiro:
+            ficheiro.write('\n')
+            ficheiro.write(NovaRota)
+            ficheiro.write('\n')
 
-
-    atualizaGrafo(NovaRota)
+        atualizaGrafo(NovaRota)
+        return True
+    except:
+        return False
 
 
 
 def criaGrafo(dadosEntrada):
-    for arquivo in dadosEntrada:
-        for i in range(0, 2):
-            vertice = Vertice(arquivo[i])
-            adicionaVerticeAoGrafo(vertice)
-        adicionarArestaAoGrafo(arquivo)
+    try:
+        for arquivo in dadosEntrada:
+            for i in range(0, 2):
+                vertice = Vertice(arquivo[i])
+                adicionaVerticeAoGrafo(vertice)
+            adicionarArestaAoGrafo(arquivo)
+    except:
+        sys.exit('Erro ao construir Grafo')
 
 
 def atualizaGrafo(listaNovaRota):
     listaNovaRota = listaNovaRota.split(',')
+
     v1 = Vertice(listaNovaRota[0])
     adicionaVerticeAoGrafo(v1)
 
@@ -127,8 +133,8 @@ if __name__ == '__main__':
 
     for param in sys.argv:
         args.append(param)
-    # nome_ficheiro = args[1]
-    nome_ficheiro = 'input-fileCp.csv'
+    nome_ficheiro = args[1]
+    # nome_ficheiro = 'input-fileCp.csv'
 
     arquivos = openArquivo(nome_ficheiro)
     criaGrafo(arquivos)
