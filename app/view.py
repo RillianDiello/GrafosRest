@@ -127,19 +127,19 @@ def atualizaGrafo(listaNovaRota):
 
     adicionarArestaAoGrafo(listaNovaRota)
 
-if __name__ == '__main__':
-
-    args = []
-
-    for param in sys.argv:
-        args.append(param)
-    nome_ficheiro = args[1]
-    # nome_ficheiro = 'input-fileCp.csv'
-
-    arquivos = openArquivo(nome_ficheiro)
-    criaGrafo(arquivos)
-
-    app.run(host='127.0.0.10', port='5000', debug=True)
+# if __name__ == '__main__':
+#
+#     args = []
+#
+#     for param in sys.argv:
+#         args.append(param)
+#     nome_ficheiro = args[1]
+#     # nome_ficheiro = 'input-fileCp.csv'
+#
+#     arquivos = openArquivo(nome_ficheiro)
+#     criaGrafo(arquivos)
+#
+#     app.run(host='127.0.0.10', port='5000', debug=True)
 
 
 
