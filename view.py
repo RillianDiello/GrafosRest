@@ -1,7 +1,7 @@
 
 import csv, sys, json
-from utils.Grafo import *
-from utils.Vertice import *
+from Models.Grafo import *
+from Models.Vertice import *
 from flask import Flask
 from flask import request, jsonify
 
@@ -23,22 +23,20 @@ def home():
     menu.append('<p>/novaRota/Origem,Destino,Custo</p>')
     return ''.join(menu)
 
-@app.route('/', methods=['GET'])
-@app.route('/arquivo/<name>')
+
+@app.route('/arquivo/<name>', methods=['GET'])
 def openFile(name):
     arquivos  = openArquivo(name)
     return jsonify(arquivos)
 
-@app.route('/', methods=['GET'])
-@app.route('/caminho/<rotaPedida>')
+@app.route('/caminho/<rotaPedida>', methods=['GET'])
 def retornaRotaECusto(rotaPedida):
     rota = rotaPedida.split('-')
     origem = Vertice(rota[0])
     destino = Vertice(rota[1])
     return json.dumps(printRota(origem, destino))
 
-@app.route('/', methods=['GET'])
-@app.route('/novaRota/<novaRota>')
+@app.route('/novaRota/<novaRota>',methods=['GET'])
 def NovaRota(novaRota):
     if writeArquivo(novaRota):
         return '<h1>Rota incluida com sucesso</h1>'

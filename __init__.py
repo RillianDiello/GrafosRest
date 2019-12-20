@@ -1,11 +1,11 @@
 import csv, sys, json
-from utils.Grafo import *
-from utils.Vertice import *
+from Models.Grafo import *
+from Models.Vertice import *
 from flask import Flask
-from flask import request, jsonify
+from flask import request, jsonify, render_template, request, url_for, redirect
 from app.view import *
 
-app = Flask('grafoApi')
+app = Flask(__name__)
 app.config["DEBUG"] = True
 
 grafo = Grafo()

@@ -1,5 +1,5 @@
-from utils.Vertice import *
-from utils.Aresta import *
+from Models.Vertice import *
+from Models.Aresta import *
 import sys
 # Grafo
 class Grafo:
