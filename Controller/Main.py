@@ -54,24 +54,24 @@ class Main(object):
         else:
             self.grafo.novo_Vertice(vertice.getId())
 
-    def adicionarArestaAoGrafo(self, linhaCsv):
-        v1 = Vertice(linhaCsv[0])
-        v2 = Vertice(linhaCsv[1])
+    def adicionarArestaAoGrafo(self, linhacsv):
+        v1 = Vertice(linhacsv[0])
+        v2 = Vertice(linhacsv[1])
 
-        arestaJaExiste = self.grafo.busca_Aresta(v1, v2)
+        arestajaexiste = self.grafo.busca_Aresta(v1, v2)
 
-        if arestaJaExiste is None:
-            self.grafo.nova_Aresta(v1.getId(), v2.getId(), int(linhaCsv[2]))
+        if arestajaexiste is None:
+            self.grafo.nova_Aresta(v1.getId(), v2.getId(), int(linhacsv[2]))
         else:
             print("já existe")
 
-    def atualizaGrafo(self, listaNovaRota):
-            listaNovaRota = listaNovaRota.split(',')
+    def atualizaGrafo(self, novarota):
+            novarota = novarota.split(',')
 
-            v1 = Vertice(listaNovaRota[0])
+            v1 = Vertice(novarota[0])
             self.adicionaVerticeAoGrafo(self, v1)
 
-            v2 = Vertice(listaNovaRota[1])
+            v2 = Vertice(novarota[1])
             self.adicionaVerticeAoGrafo(self, v2)
 
-            self.adicionarArestaAoGrafo(self, listaNovaRota)
+            self.adicionarArestaAoGrafo(self, novarota)

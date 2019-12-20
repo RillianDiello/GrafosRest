@@ -295,7 +295,7 @@ class Grafo:
 
     def eh_euleriano(self):
         for u in self.lista_Vertices:
-            if self.grau(u) % 2 is not 0:
+            if self.grau(u) % 2 != 0:
                 return False
         return True
 

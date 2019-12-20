@@ -26,9 +26,9 @@ def openFile(name):
     return jsonify(lista_dados)
 
 @app.route('/novaRota/<novaRota>',methods=['GET'])
-def NovaRota(novaRota):
-    if controller_api.arquivo.writeArquivo(novaRota):
-        controller_api.atualizaGrafo(controller_api, novaRota)
+def NovaRota(novarota):
+    if controller_api.arquivo.writeArquivo(novarota):
+        controller_api.atualizaGrafo(controller_api, novarota)
         return '<h1>Rota incluida com sucesso</h1>'
     else:
         return '<h1>Não foi possivel incluir rota</h1>'
