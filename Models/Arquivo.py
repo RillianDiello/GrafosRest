@@ -27,17 +27,17 @@ class Arquivo(object):
 	#função que ler o arquivo de entrada
 	def ler_entrada(self):
 		self.ler_arquivo()
-		self.monta_grafo()
 
 
 		return self.grafo
 
-	def writeArquivo(self,NovaRota):
+	def writeArquivo(self, novarota):
 		try:
 			with open(self.dadosEntrada, 'a+') as ficheiro:
 				ficheiro.write('\n')
-				ficheiro.write(NovaRota)
+				ficheiro.write(novarota)
 				ficheiro.write('\n')
+				ficheiro.close()
 
 			return True
 		except:

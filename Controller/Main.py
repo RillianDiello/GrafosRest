@@ -75,3 +75,17 @@ class Main(object):
             self.adicionaVerticeAoGrafo(self, v2)
 
             self.adicionarArestaAoGrafo(self, novarota)
+
+    def obtemRota(self, origem, destino):
+        self.grafo.Depth_first_search()
+        rota = self.grafo.imprime_Grafo_com_Destino(origem,destino)
+        return rota
+
+    def obtemCustoRota(self, origem, destino):
+        resposta = self.grafo.Dijkstra(origem.getId())
+        custo = 0
+        for ele in resposta:
+            if ele.id == destino.getId():
+                custo = ele.estimativa
+
+        return custo
