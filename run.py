@@ -1,4 +1,3 @@
-from Api.api import *
 from Controller.Main import *
 import json
 from flask import Flask
