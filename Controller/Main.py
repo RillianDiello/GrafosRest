@@ -10,11 +10,10 @@ from Models.Arquivo import *
 
 class Main(object):
 
-    def __init__(self, interface = None, arquivo_entrada = None):
+    def __init__(self, arquivo_entrada = None):
         self.arquivo_entrada = arquivo_entrada
         self.arquivo = Arquivo(self.arquivo_entrada)
         self.grafo = Grafo()
-        self.interface = interface
 
 
     def validar_arquivo(self):

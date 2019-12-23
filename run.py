@@ -3,10 +3,9 @@ import json
 from flask import Flask
 from flask import jsonify
 
+
 app = Flask(__name__)
 app.config["DEBUG"] = True
-
-controller_api = Main()
 
 @app.route('/', methods=['GET'])
 def home():
@@ -50,5 +49,9 @@ if __name__ == '__main__':
         args.append(param)
     # nome_ficheiro = args[1]
     nome_ficheiro = 'input-fileCp.csv'
+
+    controller_api = Main(nome_ficheiro)
+    controller_api.tratar_dados_de_entrada()
+    controller_api.monta_grafo()
 
     app.run(host='127.0.0.10', port='5000', debug=True)
