@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sys, csv
-from Models.Vertice import *
-from Models.Aresta import *
+import csv
 from Models.Grafo import *
 
 class Arquivo(object):

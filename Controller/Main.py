@@ -79,6 +79,8 @@ class Main(object):
         rota = []
         self.grafo.Depth_first_search()
         rota = self.grafo.imprime_Grafo_com_Destino(origem, destino)
+        if not rota:
+            return None
         rota.reverse()
         return rota
 

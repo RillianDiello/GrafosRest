@@ -115,10 +115,9 @@ class Grafo:
         retorno = []
         destino_Aux = self.busca_Vertice(destino)
         if len(destino_Aux.predecessor) == 0:
-            return "Não ha caminho"
+            return None
         else:
-            # print(destino)
-            retorno.append(destino)
+            # retorno.append(destino)
             retorno.append(self.imprime_Grafo(origem, destino, retorno))
             return retorno
 
@@ -131,8 +130,7 @@ class Grafo:
             if len(destino_Aux.predecessor) == 0:
                 return None
             else:
-                # print(destino_Aux.predecessor[0], '->')
-                caminho.append(destino_Aux.predecessor[0])
+                caminho.append(destino)
                 return self.imprime_Grafo(origem, destino_Aux.predecessor[0], caminho)
 
 
@@ -171,9 +169,7 @@ class Grafo:
                     self.relaxa_Vertice(u, v, w)
 
         return resposta
-        # print("Estimativas: ")
-        # for i in resposta:
-        #     print(i)  # imprimo as respostas
+
     ####################################################################
     
     def BellManFord2(self,origem):
