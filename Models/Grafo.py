@@ -67,7 +67,6 @@ class Grafo:
                 self.visita(v)
 
     def visita(self, u):
-        # print("Visitando o vertice: %s" % u.getId())
         u.setVisitado(True)
         self.tempo += 1
         u.setImput(self.tempo)
@@ -79,7 +78,6 @@ class Grafo:
 
         self.tempo += 1
         u.setOutput(self.tempo)
-        # print("Voltando para: ", u.predecessor)
 
     ####################################################################
 
@@ -114,23 +112,29 @@ class Grafo:
             u.setVisitado(True)
 
     def imprime_Grafo_com_Destino(self, origem, destino):
+        retorno = []
         destino_Aux = self.busca_Vertice(destino)
         if len(destino_Aux.predecessor) == 0:
-            print("Não ha caminho")
+            return "Não ha caminho"
         else:
-            print(destino)
-            self.imprime_Grafo(origem, destino)
+            # print(destino)
+            retorno.append(destino)
+            retorno.append(self.imprime_Grafo(origem, destino, retorno))
+            return retorno
 
-    def imprime_Grafo(self, origem, destino):
+    def imprime_Grafo(self, origem, destino, caminho):
+
         if origem == destino:
-            print()
+            return origem
         else:
             destino_Aux = self.busca_Vertice(destino)
             if len(destino_Aux.predecessor) == 0:
-                print("Não ha caminho")
+                return None
             else:
-                print(destino_Aux.predecessor[0], '->')
-                self.imprime_Grafo(origem, destino_Aux.predecessor[0])
+                # print(destino_Aux.predecessor[0], '->')
+                caminho.append(destino_Aux.predecessor[0])
+                return self.imprime_Grafo(origem, destino_Aux.predecessor[0], caminho)
+
 
     ####################################################################
 

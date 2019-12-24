@@ -36,9 +36,9 @@ def retornaRotaECusto(rotaPedida):
     rota = rotaPedida.split('-')
     origem = Vertice(rota[0])
     destino = Vertice(rota[1])
-    rota = controller_api.obtemRota(origem, destino)
+    rota = controller_api.obtemRota(origem.getId(), destino.getId())
     custo = controller_api.obtemCustoRota(origem, destino)
-    return json.dumps([rota, custo])
+    return jsonify(custo)
 
 
 if __name__ == '__main__':
