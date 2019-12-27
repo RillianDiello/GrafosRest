@@ -2,6 +2,7 @@ from Controller.Main import *
 import json
 from flask import Flask
 from flask import jsonify
+from flask import render_template
 
 
 app = Flask(__name__)
@@ -9,12 +10,13 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    menu =  []
-    menu.append('<h1>Menu</h1>')
-    menu.append('<p>/arquivo/nome_do_arquivo</p>')
-    menu.append('<p>/caminho/Origem-Destino</p>')
-    menu.append('<p>/novaRota/Origem,Destino,Custo</p>')
-    return ''.join(menu)
+    # menu =  []
+    # menu.append('<h1>Menu</h1>')
+    # menu.append('<p>/arquivo/nome_do_arquivo</p>')
+    # menu.append('<p>/caminho/Origem-Destino</p>')
+    # menu.append('<p>/novaRota/Origem,Destino,Custo</p>')
+    # return ''.join(menu)
+    return render_template('home.html')
 
 @app.route('/arquivo/<name>', methods=['GET'])
 def openFile(name):
