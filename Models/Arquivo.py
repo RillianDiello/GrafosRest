@@ -36,12 +36,12 @@ class Arquivo(object):
 		self.ler_arquivo()
 
 
-	def writeArquivo(self, novarota):
+	def writeArquivo(self, origem, destino, custo):
 		try:
-			with open(self.dadosEntrada, 'a+') as ficheiro:
+			novarota = origem + ',' + destino + ',' + custo
+			with open(self.arquivo_entrada, 'a+') as ficheiro:
 				ficheiro.write('\n')
 				ficheiro.write(novarota)
-				ficheiro.write('\n')
 				ficheiro.close()
 
 			return True

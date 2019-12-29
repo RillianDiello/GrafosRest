@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#pacotes nativos
+# pacotes nativos
 import sys
 import os
 import time
@@ -10,11 +10,10 @@ from Models.Arquivo import *
 
 class Main(object):
 
-    def __init__(self, arquivo_entrada = None):
+    def __init__(self, arquivo_entrada=None):
         self.arquivo_entrada = arquivo_entrada
         self.arquivo = Arquivo(self.arquivo_entrada)
         self.grafo = Grafo()
-
 
     def validar_arquivo(self):
 
@@ -41,7 +40,6 @@ class Main(object):
         except:
             sys.exit('Erro ao construir Grafo')
 
-
     # chama o metodo que ler os dados do arquivo de entrada
     def tratar_dados_de_entrada(self):
         return self.arquivo.ler_entrada()
@@ -64,16 +62,23 @@ class Main(object):
         else:
             print("já existe")
 
-    def atualizaGrafo(self, novarota):
-            novarota = novarota.split(',')
+    def adicionarArestaAoGrafoII(self, origem, destino, custo):
+        arestajaexiste = self.grafo.busca_Aresta(origem, destino )
 
-            v1 = Vertice(novarota[0])
-            self.adicionaVerticeAoGrafo(self, v1)
+        if arestajaexiste is None:
+            self.grafo.nova_Aresta(origem.getId(), destino.getId(), int(custo))
+        else:
+            print("já existe")
 
-            v2 = Vertice(novarota[1])
-            self.adicionaVerticeAoGrafo(self, v2)
+    def atualizaGrafo(self, origem, destino, custo):
 
-            self.adicionarArestaAoGrafo(self, novarota)
+        v1 = Vertice(origem)
+        self.adicionaVerticeAoGrafo(v1)
+
+        v2 = Vertice(destino)
+        self.adicionaVerticeAoGrafo(v2)
+
+        self.adicionarArestaAoGrafoII(v1, v2, custo)
 
     def obtemRota(self, origem, destino):
         rota = []
