@@ -27,42 +27,57 @@ Caso desejemos viajar de **GRU** para **CDG** existem as seguintes rotas:
 
 O melhor preço é da rota **40** logo, o output da consulta deve ser **CDG - SCL - ORL - CDG**.
 
-### Execução do programa ###
-A inicializacao do teste se dará por linha de comando onde o primeiro argumento é o arquivo com a lista de rotas inicial.
 
+### Solução ###
+A solução proposta para este desafio teve como base os Grafos. Grafos são algumas das estruturas fundamentais dentro da 
+computação, sendo constituidos basicamente de vertices e arestas. Arestas estas que podem ser direcionadas e possuirem
+um custo ou peso associado. 
+
+De maneira direta cada linha do arquivo representa uma origem e um destino, bem como o custo envolvido entre eles.
+Desta forma foi construido um grafo direcional com pesos associados. Apartir da construção desta estrutura foram implementados
+alguns dos algoritmos conhecidos dentro de teoria dos Grafos para a solução do problema.
+
+Basicamente o problema a ser resolvido e o conhecido caminho minimo ou caxeiro viajante. Este é um dos problemas mais famosos e 
+estudados dentro da Computação e existem atualmente diversas formas de solução para este problema.
+
+Visando uma maior riqueza do código forma desenvolvidos vários algoritmos existentes dentro da teoria dos Grafos, entre eles destacam-se:
+
+* Busca em profundiade;
+* Busca em Largura;
+* Dijkstra;
+* BellManFord e BellManFord2;
+* Entre muitos outros;
+
+No entanto para o problema em questão, foram utilizados apenas dois deles, sendo: a busca em profundidade que tem como objetivo
+retornar a rota que deve ser feita vizando o menor custo. E o Algoritmo de Dijkstra que provem o valor do menor custo envolvido 
+mediante o uso de uma estimativa inicial.
+
+
+### Execução do programa ###
+Neste projeto foram construidas duas interfaces, denominadas console.py e run.py. Sendo que ambas leêm um argumento de 
+linha de comando que indica qual o arquivo será utilizado para a
+A inicializacao do teste se dará por linha de comando onde o primeiro é a solução que deseja executar e o segundo 
+argumento é o arquivo com a lista de rotas inicial.
+
+Caso você deseje executar a solução run.py:
 ```shell
-$ mysolution input-routes.csv
+$ python run.py input-routes.csv
+```
+Caso deseje executar a soluçaão console.py:
+```shell
+$ python console.py input-routes.csv
+```
+### Explicando as interfaces ###
+A solução console é a simples, basicamente ela le o arquivo de entrada. Constrói um grafo tendo como base as linhas do arquivo.
+É disponibilizado um menu de operações, dentro do próprio console e toda a interação também ocorre ali:
+```
+        /////////  MENU  /////////
+        1 - Para listar Rotas 
+        2 - Para add nova rota
+        3 - Para consultar rota
+        0 - Para sair
+        //////////////////////////
 ```
 
-Duas interfaces de consulta devem ser implementadas:
-- Interface de console deverá receber um input com a rota no formato "DE-PARA" e imprimir a melhor rota e seu respectivo valor.
-  Exemplo:
-  ```shell
-  please enter the route: GRU-CDG
-  best route: GRU - BRC - SCL - ORL - CDG > $40
-  please enter the route: BRC-CDG
-  best route: BRC - ORL > $30
-  ```
-
-- Interface Rest
-    A interface Rest deverá suportar:
-    - Registro de novas rotas. Essas novas rotas devem ser persistidas no arquivo csv utilizado como input(input-routes.csv),
-    - Consulta de melhor rota entre dois pontos.
-
-Também será necessária a implementação de 2 endpoints Rest, um para registro de rotas e outro para consula de melhor rota.
-
-## Recomendações ##
-Para uma melhor fluides da nossa conversa, atente-se aos seguintes pontos:
-
-* Envie apenas o código fonte,
-* Estruture sua aplicação seguindo as boas práticas de desenvolvimento,
-* Evite o uso de frameworks ou bibliotecas externas à linguagem. Utilize apenas o que for necessário para a exposição do serviço,
-* Implemente testes unitários seguindo as boas praticas de mercado,
-* Documentação
-  Em um arquivo Texto ou Markdown descreva:
-  * Como executar a aplicação,
-  * Estrutura dos arquivos/pacotes,
-  * Explique as decisões de design adotadas para a solução,
-  * Descreva sua APÌ Rest de forma simplificada.
 
 # GrafosRest

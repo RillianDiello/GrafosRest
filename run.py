@@ -1,7 +1,5 @@
 from Controller.Main import *
-import json
 from flask import Flask
-from flask import jsonify
 from flask import render_template
 from flask import redirect, request
 from flask import url_for
@@ -56,8 +54,7 @@ if __name__ == '__main__':
 
     for param in sys.argv:
         args.append(param)
-    # nome_ficheiro = args[1]
-    nome_ficheiro = 'input-fileCp.csv'
+    nome_ficheiro = args[1]
 
     controller_api = Main(nome_ficheiro)
     controller_api.tratar_dados_de_entrada()
