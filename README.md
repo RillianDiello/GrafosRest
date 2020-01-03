@@ -70,6 +70,7 @@ $ python console.py input-routes.csv
 ### Explicando as interfaces ###
 A solução console é a simples, basicamente ela le o arquivo de entrada. Constrói um grafo tendo como base as linhas do arquivo.
 É disponibilizado um menu de operações, dentro do próprio console e toda a interação também ocorre ali:
+
 ```
         /////////  MENU  /////////
         1 - Para listar Rotas 
@@ -79,5 +80,10 @@ A solução console é a simples, basicamente ela le o arquivo de entrada. Const
         //////////////////////////
 ```
 
+A cada uma das opções do menu são disponibilizadas instruções sobre a utilização da seção, por exemplo. Ao solicitar a 
+inclusão de uma nova rota, é apresentado no console uma mensagem indicando qual o formato valido para 
+realizar esta operação.
 
-# GrafosRest
+O principal ponto negativo desta solução está literalmente na dificuldade de interação entre o usuario e aplicação.
+
+
