@@ -36,7 +36,7 @@ def obterViagem(grafo):
     origem = Vertice(origem)
     destino = Vertice(destino)
 
-    rota = grafo.obtemRota(origem.getId(), destino.getId())
+    rota = grafo.obtemRotaLargura(origem.getId(), destino.getId())
 
     custo = grafo.obtemCustoRota(origem, destino)
 
@@ -49,8 +49,8 @@ if __name__ == '__main__':
 
     for param in sys.argv:
         args.append(param)
-    nome_ficheiro = args[1]
-
+    # nome_ficheiro = args[1]
+    nome_ficheiro = 'input-fileCp.csv'
     controller_api = Main(nome_ficheiro)
     controller_api.tratar_dados_de_entrada()
     controller_api.monta_grafo()

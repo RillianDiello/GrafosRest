@@ -54,6 +54,17 @@ class Grafo:
         else:
             return None
 
+    def busca_Adjacentes(self, u):  # Método recebe um vertice e localizada seus adjacentes
+
+        adjacentes = []
+        for i in range(len(self.lista_Arestas)):
+            origem = self.lista_Arestas[i].getOrigem()
+            destino = self.lista_Arestas[i].getDestino()
+            if (u.getId() == origem.getId()) and (destino.getVisitado() == False):
+                destino.setVisitado(True)  # Para que não retorn o mesmo vertice seguidas veses
+                adjacentes.append(destino)
+        return adjacentes
+
     ####################################################################
 
     def Depth_first_search(self):
@@ -97,18 +108,15 @@ class Grafo:
         self.inicializa_Fonte(fonte)
         lista = [fonte]
         while 0 != len(lista):
-            u = lista[0]
-            v = self.busca_Adjacente(u)  # retorna adjacente não visitado
-            if v is None:
-                lista.pop(0)  # retiro o vertice sem adjacentes
-
-            else:
+            u = lista[0]  # recebe o vertice q está no inicio da fila
+            # v = self.busca_Adjacente(u)  # retorna adjacente não visitado
+            adjs = self.busca_Adjacentes(u)
+            for v in adjs:
                 self.tempo += 1
                 v.setImput(self.tempo)
                 v.predecessor.append(u.getId())
-                v.setVisitado(True)
                 lista.append(v)
-
+            lista.pop(0)
             u.setVisitado(True)
 
     def imprime_Grafo_com_Destino(self, origem, destino):
@@ -117,7 +125,6 @@ class Grafo:
         if len(destino_Aux.predecessor) == 0:
             return None
         else:
-            # retorno.append(destino)
             retorno.append(self.imprime_Grafo(origem, destino, retorno))
             return retorno
 
@@ -176,7 +183,7 @@ class Grafo:
         acc = 0
         fonte = self.busca_Vertice(origem)
         self.inicializa_Fonte(fonte)
-        for i in range(1,len(self.lista_Vertices)-1):
+        for i in range(1, len(self.lista_Vertices)-1):
             for w in self.lista_Arestas:
                 u = w.getOrigem()
                 v = w.getDestino()

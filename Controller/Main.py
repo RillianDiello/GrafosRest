@@ -80,9 +80,18 @@ class Main(object):
 
         self.adicionarArestaAoGrafoII(v1, v2, custo)
 
-    def obtemRota(self, origem, destino):
+    def obtemRotaProfunda(self, origem, destino):
         rota = []
         self.grafo.Depth_first_search()
+        rota = self.grafo.imprime_Grafo_com_Destino(origem, destino)
+        if not rota:
+            return None
+        rota.reverse()
+        return rota
+
+    def obtemRotaLargura(self, origem, destino):
+        rota = []
+        self.grafo.Breadth_first_search(origem)
         rota = self.grafo.imprime_Grafo_com_Destino(origem, destino)
         if not rota:
             return None

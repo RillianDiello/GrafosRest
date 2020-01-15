@@ -29,6 +29,7 @@ O melhor preço é da rota **40** logo, o output da consulta deve ser **CDG - SC
 
 
 ### Solução ###
+
 A solução proposta para este desafio teve como base os Grafos. Grafos são algumas das estruturas fundamentais dentro da 
 computação, sendo constituidos basicamente de vertices e arestas. Arestas estas que podem ser direcionadas e possuirem
 um custo ou peso associado. 
