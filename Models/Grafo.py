@@ -1,6 +1,8 @@
 from Models.Vertice import *
 from Models.Aresta import *
 import sys
+
+
 # Grafo
 class Grafo:
     def __init__(self, direcionado=True):
@@ -61,7 +63,7 @@ class Grafo:
             origem = self.lista_Arestas[i].getOrigem()
             destino = self.lista_Arestas[i].getDestino()
             if (u.getId() == origem.getId()) and (destino.getVisitado() == False):
-                destino.setVisitado(True)  # Para que não retorn o mesmo vertice seguidas veses
+                # destino.setVisitado(True)  # Para que não retorn o mesmo vertice seguidas veses
                 adjacentes.append(destino)
         return adjacentes
 
@@ -96,8 +98,9 @@ class Grafo:
         for v in self.lista_Vertices:
             v.setEstimativa(99999)
             v.setVisitado(False)
-        fonte.setVisitado(True)
+            v.setColor('B')
         fonte.setEstimativa(0)
+        fonte.setColor('C')
 
     ####################################################################
 
@@ -112,12 +115,18 @@ class Grafo:
             # v = self.busca_Adjacente(u)  # retorna adjacente não visitado
             adjs = self.busca_Adjacentes(u)
             for v in adjs:
-                self.tempo += 1
-                v.setImput(self.tempo)
-                v.predecessor.append(u.getId())
-                lista.append(v)
-            lista.pop(0)
+                if(v.getColor() == 'B'):
+                    self.tempo += 1
+                    v.setEstimativa(u.getEstimativa() + self.busca_Aresta(u, v).getPeso())
+                    v.setImput(self.tempo)
+                    v.setColor('C')
+                    v.setPai(u.getId())
+                    lista.append(v)
             u.setVisitado(True)
+
+
+            u.setColor('P')
+            lista.pop(0)
 
     def imprime_Grafo_com_Destino(self, origem, destino):
         retorno = []
@@ -139,7 +148,6 @@ class Grafo:
             else:
                 caminho.append(destino)
                 return self.imprime_Grafo(origem, destino_Aux.predecessor[0], caminho)
-
 
     ####################################################################
 
@@ -178,46 +186,47 @@ class Grafo:
         return resposta
 
     ####################################################################
-    
-    def BellManFord2(self,origem):
+
+    def BellManFord2(self, origem):
         acc = 0
         fonte = self.busca_Vertice(origem)
         self.inicializa_Fonte(fonte)
-        for i in range(1, len(self.lista_Vertices)-1):
+        for i in range(1, len(self.lista_Vertices) - 1):
             for w in self.lista_Arestas:
                 u = w.getOrigem()
                 v = w.getDestino()
-                if u.getEstimativa()+w.getPeso() < v.getEstimativa():
-                    v.predecessor= [u.getId()]
-                    v.setEstimativa(u.getEstimativa()+w.getPeso())
+                if u.getEstimativa() + w.getPeso() < v.getEstimativa():
+                    v.predecessor = [u.getId()]
+                    v.setEstimativa(u.getEstimativa() + w.getPeso())
 
         for w in self.lista_Arestas:
             u = w.getOrigem()
             v = w.getDestino()
             if u.getEstimativa() + w.getPeso() < v.getEstimativa():
-                acc=acc+1
-        if acc>0:
+                acc = acc + 1
+        if acc > 0:
             return True
         else:
             return False
+
     ####################################################################
     def Bellman_Ford(self, origem):
         fonte = self.busca_Vertice(origem)
         self.inicializa_Fonte(fonte)
-        for i in range(1,len(self.lista_Vertices)-1):
+        for i in range(1, len(self.lista_Vertices) - 1):
             for w in self.lista_Arestas:
                 u = w.getOrigem()
                 v = w.getDestino()
-                #self.relaxa_Vertice(u, v, w)
+                # self.relaxa_Vertice(u, v, w)
                 if u.getEstimativa() + w.getPeso() < v.getEstimativa():
-                    print(u.getEstimativa(),w.getPeso(), v.getEstimativa())
+                    print(u.getEstimativa(), w.getPeso(), v.getEstimativa())
                     v.setEstimativa(u.getEstimativa() + w.getPeso())
-                    v.predecessor=u.getId()  # guarda apenas o id
+                    v.predecessor = u.getId()  # guarda apenas o id
 
         for w in self.lista_Arestas:
             u = w.getOrigem()
             v = w.getDestino()
-            if u.getEstimativa() + w.getPeso()<v.getEstimativa() :
+            if u.getEstimativa() + w.getPeso() < v.getEstimativa():
                 return False  # Não existe ciclo negativo
             else:
                 return True  # Exixte ciclo negatio
@@ -265,7 +274,7 @@ class Grafo:
     def is_Cyclic(self):
         if (len(self.lista_Arestas) > len(self.lista_Vertices) - 1):
             print("Grafo Cíclico por Nº Aresta : %i > Nº Vértices: %i" % (
-            len(self.lista_Arestas), len(self.lista_Vertices)))
+                len(self.lista_Arestas), len(self.lista_Vertices)))
         else:
             print("Grafo Acíclico")
 

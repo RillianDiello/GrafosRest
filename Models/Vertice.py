@@ -6,6 +6,8 @@ class Vertice():
         self.output = 0
         self.visitado = False
         self.predecessor = []
+        self.color = 'B'
+        self.pai = None
 
     def setVisitado(self, valor):
         self.visitado = valor
@@ -30,6 +32,18 @@ class Vertice():
 
     def getEstimativa(self):
         return self.estimativa
+
+    def getColor(self):
+        return self.color
+
+    def setColor(self, color):
+        self.color = color
+
+    def setPai(self, pai):
+        self.pai = pai
+
+    def getPai(self):
+        return self.pai
 
     def __str__(self):
         return (" Vertice  : %s \n Estimativa: %i \n Tempo(%i\%i): " % (
