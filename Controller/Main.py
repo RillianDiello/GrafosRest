@@ -98,6 +98,12 @@ class Main(object):
         rota.reverse()
         return rota
 
+    def obterRotaDijkstra(self, origem, destino):
+        resposta = self.grafo.Dijkstra(origem)
+        rota, custo = self.grafo.imprimirRotaDijsktra(resposta, destino)
+
+        return rota, custo
+
     def obtemCustoRota(self, origem, destino):
         resposta = self.grafo.Dijkstra(origem.getId())
         custo = 0

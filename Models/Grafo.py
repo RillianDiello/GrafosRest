@@ -137,6 +137,7 @@ class Grafo:
             retorno.append(self.imprime_Grafo(origem, destino, retorno))
             return retorno
 
+
     def imprime_Grafo(self, origem, destino, caminho):
 
         if origem == destino:
@@ -149,6 +150,15 @@ class Grafo:
                 caminho.append(destino)
                 return self.imprime_Grafo(origem, destino_Aux.predecessor[0], caminho)
 
+    def imprimirRotaDijsktra(self, resposta, destino):
+        rota = []
+        for vertice in resposta:
+            if(vertice.getId() == destino):
+                rota = vertice.predecessor
+                rota.append(destino)
+                return rota, vertice.getEstimativa()
+
+        return rota
     ####################################################################
 
     def relaxa_Vertice(self, u, v, w):
@@ -184,6 +194,22 @@ class Grafo:
                     self.relaxa_Vertice(u, v, w)
 
         return resposta
+
+    def DijkstraPath(self, origem, destino):
+
+        fonte = self.busca_Vertice(origem)
+        if fonte is None:
+            return "Vertice Nulo"
+
+        self.inicializa_Fonte(fonte)
+        lista = []
+        resposta = []  # conjunto resposta
+        for i in self.lista_Vertices:
+            lista.append(i)
+
+        # while len(lista) != 0:
+
+
 
     ####################################################################
 

@@ -36,9 +36,7 @@ def obterViagem(grafo):
     origem = Vertice(origem)
     destino = Vertice(destino)
 
-    rota = grafo.obtemRotaLargura(origem.getId(), destino.getId())
-
-    custo = grafo.obtemCustoRota(origem, destino)
+    rota, custo = grafo.obterRotaDijkstra(origem.getId(), destino.getId())
 
     print('Rota: {} \n'. format(rota))
     print('Custo: {} \n'. format(custo))
