@@ -41,9 +41,7 @@ def caminho():
     origem = Vertice(request.form['origem'])
     destino = Vertice(request.form['destino'])
 
-    rota = controller_api.obtemRota(origem.getId(), destino.getId())
-
-    custo = controller_api.obtemCustoRota(origem, destino)
+    rota, custo = controller_api.obterRotaDijkstra(origem.getId(), destino.getId())
 
     return render_template('consultarota.html', rotas = rota, custo = custo)
 
