@@ -195,21 +195,6 @@ class Grafo:
 
         return resposta
 
-    def DijkstraPath(self, origem, destino):
-
-        fonte = self.busca_Vertice(origem)
-        if fonte is None:
-            return "Vertice Nulo"
-
-        self.inicializa_Fonte(fonte)
-        lista = []
-        resposta = []  # conjunto resposta
-        for i in self.lista_Vertices:
-            lista.append(i)
-
-        # while len(lista) != 0:
-
-
 
     ####################################################################
 
@@ -258,6 +243,7 @@ class Grafo:
                 return True  # Exixte ciclo negatio
 
     ####################################################################
+
     def Minimum_spanning_tree(self, origem):  # Prim
         fonte = self.busca_Vertice(origem)
         if fonte is None:
@@ -297,6 +283,7 @@ class Grafo:
             print(i)
 
     ####################################################################
+
     def is_Cyclic(self):
         if (len(self.lista_Arestas) > len(self.lista_Vertices) - 1):
             print("Grafo Cíclico por Nº Aresta : %i > Nº Vértices: %i" % (

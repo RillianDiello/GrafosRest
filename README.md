@@ -30,28 +30,45 @@ O melhor preço é da rota **40** logo, o output da consulta deve ser **CDG - SC
 
 ### Solução ###
 
-A solução proposta para este desafio teve como base os Grafos. Grafos são algumas das estruturas fundamentais dentro da 
-computação, sendo constituidos basicamente de vertices e arestas. Arestas estas que podem ser direcionadas e possuirem
-um custo ou peso associado. 
+A solução proposta para este desafio teve como base o estudo de Algoritmos de Grafos. Grafos são algumas das estruturas 
+fundamentais dentro da computação, sendo constituidos basicamente de vertices e arestas. Arestas estas que podem ser 
+direcionadas e possuirem um custo ou peso associado. 
 
-De maneira direta cada linha do arquivo representa uma origem e um destino, bem como o custo envolvido entre eles.
-Desta forma foi construido um grafo direcional com pesos associados. Apartir da construção desta estrutura foram implementados
-alguns dos algoritmos conhecidos dentro de teoria dos Grafos para a solução do problema.
+Assim sendo, uma simples interpretação do arquivo de entrada, nos permite compreender que cada Origem e Destino 
+correspode a um vertice, e a existência de uma conexão entra eles, corresponde a uma aresta, tal que o custo associado 
+a conexão seria o custo da nossa aresta.
 
-Basicamente o problema a ser resolvido e o conhecido caminho minimo ou caxeiro viajante. Este é um dos problemas mais famosos e 
-estudados dentro da Computação e existem atualmente diversas formas de solução para este problema.
+Partindo desta analagocia, basicamente o problema a ser resolvido e o conhecido caminho minimo ou caxeiro viajante.
+Este é um dos problemas mais famosos e estudados dentro da Computação e existem atualmente diversas formas de solução 
+para este problema. No entanto, é importante compreender que este problema se enquadra no que chamamos dentro da 
+computação de problema NP-Completo. "Busquem conhecimento"
 
-Visando uma maior riqueza do código forma desenvolvidos vários algoritmos existentes dentro da teoria dos Grafos, entre eles destacam-se:
+Uma das solução mais conhecida para esse tipo de problema é o algoritmo de Dijkstra. Esse algoritimo utiliza de uma
+euristica para supor uma distancia maxima entre quaisquer dois vertices, e então realiza um processo de percurso dentro 
+do grafo, partindo de um vertice origem X e identificando todas as menores distancias para que X atinja os demais.
 
-* Busca em profundiade;
-* Busca em Largura;
-* Dijkstra;
-* BellManFord e BellManFord2;
-* Entre muitos outros;
+O algoritmo de Dijkstra fornece uma solução muito cabivel dentro de diversos problemas computacionais envolvendo
+o problema dos caminhos minimos. No entanto ele parte de algumas pré-condições para que seu funcionamento seja
+garantindo. A primeira delas é que não existam arestas com pesos negativos, assim sendo não posso ter uma aresta cujo o
+peso seja -1, -2 e assim por diante. Para esse caso existem outras soluções como o algoritmo de BellManFord, que não 
+suporta ciclos negativos.
 
-No entanto para o problema em questão, foram utilizados apenas dois deles, sendo: a busca em profundidade que tem como objetivo
-retornar a rota que deve ser feita vizando o menor custo. E o Algoritmo de Dijkstra que provem o valor do menor custo envolvido 
-mediante o uso de uma estimativa inicial.
+Como me baseie em um material de estudo, em alguns slides e até alguns códigos perdidos, enquanto estudava. Existem
+diversos outros algoritmos implementados como: Busca em Largura, Busca em Profundidade, Euler, Arvore Geradora Minima,
+Ciclos, Matriz Transpostas e etc.
+
+No entanto para o problema em questão, foi utilizando realmente apenas o Dijkstra, pois estamos assumindo que vc não 
+pode viajar em uma rota de avião de um lugar para outro sem pagar nada.
+
+#### Etapas de Solução ####
+
+A solução deste probelma compreendeu a implementação de duas interfaces, uma console e outra web. Também foram 
+desenvolvidas classes para representar os elementos que compõe o nosso o Grafo. Sendo classes para Arestas, Vertices e o
+Grafo propriamente. 
+
+Foi também necessário o desenvolvimento de um classe Arquivo, para manipular a leitura do nosso arquivo de entrada, bem
+como as manipuluações necessárias como a inclusão de uma nova rota. E alem disso, foi desenvolvida uma classe Main.py
+que engloba todas as operações e manipulações necessárias para a utilização dos grafos.
 
 
 ### Execução do programa ###
