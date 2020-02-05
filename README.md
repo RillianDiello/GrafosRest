@@ -60,6 +60,10 @@ Ciclos, Matriz Transpostas e etc.
 No entanto para o problema em questão, foi utilizando realmente apenas o Dijkstra, pois estamos assumindo que vc não 
 pode viajar em uma rota de avião de um lugar para outro sem pagar nada.
 
+Foi utilizada a linguagem Python. Why?? O Python é uma linguagem que possui uma otima relação com problemas desta
+natureza, além de ser uma linguagem relativamente fácil de ser utilizada. Outro ponto é que foi desenvolvida uma
+interface Web utilizando uma API do python (Flask), e eu queria estudar como era isso =D.
+
 #### Etapas de Solução ####
 
 A solução deste probelma compreendeu a implementação de duas interfaces, uma console e outra web. Também foram 
@@ -73,11 +77,9 @@ que engloba todas as operações e manipulações necessárias para a utilizaç�
 
 ### Execução do programa ###
 Neste projeto foram construidas duas interfaces, denominadas console.py e run.py. Sendo que ambas leêm um argumento de 
-linha de comando que indica qual o arquivo será utilizado para a
-A inicializacao do teste se dará por linha de comando onde o primeiro é a solução que deseja executar e o segundo 
-argumento é o arquivo com a lista de rotas inicial.
-
-Caso você deseje executar a solução run.py:
+linha de comando que indica qual o arquivo será utilizado para a a construção do Grafo de origem. Para efeito de testes
+a aplicação em console está com o arquivo estatico, mas pode ser mudado facilmente.
+A inicializacao dos programas se da por linha de comando. Caso você deseje executar a solução run.py:
 ```shell
 $ python run.py input-routes.csv
 ```
@@ -85,9 +87,13 @@ Caso deseje executar a soluçaão console.py:
 ```shell
 $ python console.py input-routes.csv
 ```
-### Explicando as interfaces ###
-A solução console é a simples, basicamente ela le o arquivo de entrada. Constrói um grafo tendo como base as linhas do arquivo.
-É disponibilizado um menu de operações, dentro do próprio console e toda a interação também ocorre ali:
+### As interfaces ###
+Aqui serão descritas as duas interfaces e algumas de suas peculiaridades:
+
+#### Console ####
+A solução console é a simples, basicamente ela le o arquivo de entrada. Constrói um grafo tendo como base as linhas do
+arquivo. É disponibilizado um menu de operações bem básico, seguindo o que muita gente vê em programação I e II, e dentro
+do próprio console ocorre toda a interação.
 
 ```
         /////////  MENU  /////////
@@ -100,7 +106,12 @@ A solução console é a simples, basicamente ela le o arquivo de entrada. Const
 
 A cada uma das opções do menu são disponibilizadas instruções sobre a utilização da seção, por exemplo. Ao solicitar a 
 inclusão de uma nova rota, é apresentado no console uma mensagem indicando qual o formato valido para 
-realizar esta operação.
+realizar esta operação. Não realizei um tratamento de exceptions tão efetivo visto que é uma aplicação bem simples, mas 
+recomendo sempre o uso de tratamentos, visto que usuarios são em suma "difíceis".
+
+Aqui temos um exemplo de saida, de uma operação no console, em que solicitamos a lista de rotas disponiveis:
+
+![](/images/ExemploSaidaRotas.png)
 
 O principal ponto negativo desta solução está literalmente na dificuldade de interação entre o usuario e aplicação.
 
