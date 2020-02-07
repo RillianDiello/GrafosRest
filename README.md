@@ -111,9 +111,22 @@ recomendo sempre o uso de tratamentos, visto que usuarios são em suma "difícei
 
 Aqui temos um exemplo de saida, de uma operação no console, em que solicitamos a lista de rotas disponiveis:
 
-![Exemplo de Saida ](/images/ExemploSaidaRotas.png "Exemplo de saída da aplicação console, ao solicitar a lista de rotas disponíveis.")
+
+![Exemplo de saida 1](/images/ExemploSaidaRotas.png "Exemplo de saída da aplicação console, ao solicitar a lista de rotas disponíveis.")
 
 O principal ponto negativo desta solução está justamente na dificuldade de interação entre o usuario e aplicação. Como
-podemos ver na tela o usuario tem que manter uma interação com o a 
+podemos ver na tela console tem que ser mantida em aberto.
+
+#### Aplicação Web ####
+
+Visando um maior conforme e modernidade no projeto, foi proposta a construção de uma solução Web, do microframework Flask,
+que diferente do Django que possui um vasto conjunto de ferramentas acopladas. O flask é composto basicamente de duas
+bibliotecas que são instaladas em conjunto, permitindo que o desenvolvedor instale apenas o que ira utilizar no projeto:
+.https://flask.palletsprojects.com/en/1.1.x/api/. 
+
+O Flask apresenta um grande desempenho, com aplicações em geral mais rápidas e leves, ao mesmo tempo que permite
+uma alta escalabilidade por parte do desenvolvedor, a medida que o projeto ou aplicação se desenvolve. O Flask também
+possui um conjunto de desvangens justamente por ser extremamente simples, não possui camada de dados, ou de validação
+de formulários. Sendo necessário a instalação de bibliotecas de terceiros.
 
 
