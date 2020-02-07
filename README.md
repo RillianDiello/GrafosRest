@@ -111,8 +111,9 @@ recomendo sempre o uso de tratamentos, visto que usuarios são em suma "difícei
 
 Aqui temos um exemplo de saida, de uma operação no console, em que solicitamos a lista de rotas disponiveis:
 
-![](/images/ExemploSaidaRotas.png)
+![Exemplo de Saida ](/images/ExemploSaidaRotas.png "Exemplo de saída da aplicação console, ao solicitar a lista de rotas disponíveis.")
 
-O principal ponto negativo desta solução está literalmente na dificuldade de interação entre o usuario e aplicação.
+O principal ponto negativo desta solução está justamente na dificuldade de interação entre o usuario e aplicação. Como
+podemos ver na tela o usuario tem que manter uma interação com o a 
 
 
