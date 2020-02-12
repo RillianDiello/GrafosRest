@@ -117,6 +117,10 @@ Aqui temos um exemplo de saida, de uma operação no console, em que solicitamos
 O principal ponto negativo desta solução está justamente na dificuldade de interação entre o usuario e aplicação. Como
 podemos ver na tela console tem que ser mantida em aberto.
 
+Exemplo de busca de uma rota:
+
+![Exemplo de saida 1](/images/ConsoleRota.png "Exemplo de saída da aplicação console, ao solicitar a lista de rotas disponíveis.")
+
 #### Aplicação Web ####
 
 Visando um maior conforme e modernidade no projeto, foi proposta a construção de uma solução Web, do microframework Flask,
@@ -129,4 +133,40 @@ uma alta escalabilidade por parte do desenvolvedor, a medida que o projeto ou ap
 possui um conjunto de desvangens justamente por ser extremamente simples, não possui camada de dados, ou de validação
 de formulários. Sendo necessário a instalação de bibliotecas de terceiros.
 
+Para a solução Web, foi construida uma API Rest em Flask, que tem como principais metodos: Consulta de Rotas existentes,
+inclusão de novas rotas e a consulta de rotas com base no menor custo. Os algoritmos de solução foram os mesmo utilizados
+na solução console, de tal forma que a principal diferença está nas interfaces. 
 
+Foi utilizada uma arquitetura de pastas simples, proxima (ou não) do MVC, onde não está bem definida a camada de View.
+Temos basicamente um Conjunto de Models que representam basicamente as estruturas necessárias ao nosso projeto ( Grafo,
+Vertice, Aresta, Arquivos). Foi gerada uma classe Main que age como uma Controller, definido quais estruturas serão criadas,
+métodos das models devem ser utilizados e quais templetes serão rendezidas. Dentro de templates estão as telas html que 
+serão apresentadas e por fim foi criada uma pasta Static que contem o esqueleto CSS utilizado, e a possibilidade de uso
+de imagens e arquivos JS.  
+
+Abaixo vemos alguns exemplos de imagens, das telas. Não foi feito um desenvolvimento profundo a cerca do Front-End, pois
+estou um pouco sem tempo mesmo.
+
+![Exemplo de saida 1](/images/TelaInicial.png "Tela Inicial.")
+
+![Exemplo de saida 1](/images/RotasDisponiveis.png "Rotas Disponíveis.")
+
+![Exemplo de saida 1](/images/Rota.png "Rotas Disponíveis.")
+
+## Observações ##
+O Python promove a construção e um arquivo requeriments, onde são inseridas todas as dependencias do projeto. De forma
+que quais biblioteca externa ou funcionalidade não presente dentro do nucleo padrão do Python deve ser inserida nesse
+arquivo para que o projeto seja realmente portavel.
+
+Basicamente nesse projeto a única necessidade externa foi mesmo o Flask. Como pode ser observado no arquivo de requeriments
+disponviel no projeto. O python tbm promove a construção de um Virtual Environments, que nada mais é que o ambiente 
+isolado do Python, onde você pode instalar bibliotecas e funções sem que comprometam o Python da sua maquina, é uma 
+solução muito recomendada, pois promove o isolamento do ambiente em que sera feito o desenvolvimento. 
+Abaixo vou deixar uns links para quem tiver interesse:
+
+### Requeriments ###
+https://jtemporal.com/requirements-txt/
+
+### Virtual Environments ###
+
+https://docs.python.org/3/tutorial/venv.html
